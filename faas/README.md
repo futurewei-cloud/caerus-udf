@@ -3,7 +3,7 @@ Caerus UDF supports FaaS build, deploy, and envocation. It currently uses Openfa
 https://www.openfaas.com/
 
 # Getting Started - Setup Openfaas Framework (Using Public Docker Hub As Function Repository)
-Note: Fowllowing steps are to setup kubenetes cluster of openfaas, where step 1-7 are pre-requirements, and step 8-12 are steps for the framework deployment  
+Note: Following steps are to set up kubernetes cluster of openfaas, where step 1-7 are pre-requirements, and step 8-12 are steps for the framework deployment  
 1. Install make :
 ```
 > apt update
@@ -130,10 +130,11 @@ root@caerus-demo:~/openfaas/faas-netes# kind delete cluster
 Deleting cluster "kind" ...
 root@caerus-demo:~/openfaas/faas-netes# make start-kind
 ```
-9.	Forward the gateway to your machine
+9. Forward the gateway to your machine
+Note: binding address 0.0.0.0 is to allow calling serverless function from outside openfaas k8s environment: --address='0.0.0.0' 
 ```
 > kubectl rollout status -n openfaas deploy/gateway
-> kubectl port-forward -n openfaas svc/gateway 8080:8080 &
+> kubectl port-forward -n openfaas svc/gateway 8080:8080 --address='0.0.0.0' &
 ```
 10. Get generated password and login using faas-cli:
 ```
